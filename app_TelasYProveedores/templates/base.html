@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %}Parisina - Gestión de Telas{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="main-header">
+            <h1><a href="{% url 'app_TelasYProveedores:listar_telas' %}">🏪 Parisina Telas</a></h1>
+            <nav class="main-nav">
+                <a href="{% url 'app_TelasYProveedores:listar_telas' %}">📊 Productos</a>
+                <a href="{% url 'app_TelasYProveedores:listar_proveedores' %}">👥 Proveedores</a>
+                <a href="{% url 'app_TelasYProveedores:crear_tela' %}">➕ Nueva Tela</a>
+                <a href="{% url 'app_TelasYProveedores:crear_proveedor' %}">➕ Nuevo Proveedor</a>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            {% block contenido %}{% endblock %}
+        </main>
+
+        <footer class="main-footer">
+            <p>© 2025 Parisina - Sistema de Gestión de Telas y Proveedores</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block titulo %}{{ proveedor.nombre }} | Parisina{% endblock %}
+
+{% block contenido %}
+<article class="supplier-detail">
+    <div class="supplier-banner">
+        <div class="supplier-placeholder-large">🏢</div>
+        <div class="supplier-info">
+            <h1>{{ proveedor.nombre }}</h1>
+            <p><strong>Contacto:</strong> {{ proveedor.contacto }}</p>
+            <p><strong>Teléfono:</strong> {{ proveedor.telefono }}</p>
+            <p><strong>Correo:</strong> {{ proveedor.correo }}</p>
+            <p><strong>Dirección:</strong> {{ proveedor.direccion }}</p>
+        </div>
+    </div>
+
+    <section class="products-section">
+        <h2>Telas Suministradas</h2>
+        {% if telas %}
+        <ul class="product-list">
+            {% for tela in telas %}
+            <li>
+                <a href="{% url 'app_TelasYProveedores:detalle_tela' tela.id %}">
+                    {{ tela.nombre }} - ${{ tela.precio }} (Stock: {{ tela.stock }})
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="empty-message">Este proveedor no tiene telas registradas.</p>
+        {% endif %}
+    </section>
+</article>
+{% endblock %}

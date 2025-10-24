@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block titulo %}{{ tela.nombre }} | Parisina{% endblock %}
+
+{% block contenido %}
+<article class="product-detail">
+    <div class="product-banner">
+        {% if tela.imagen_tela %}
+            <img src="{{ tela.imagen_tela.url }}" alt="Imagen de {{ tela.nombre }}" class="detail-photo">
+        {% else %}
+            <div class="detail-placeholder">🧵</div>
+        {% endif %}
+        <div class="product-info">
+            <h1>{{ tela.nombre }}</h1>
+            <p class="detail-category"><strong>Categoría:</strong> {{ tela.categoria }}</p>
+            <p class="detail-price"><strong>Precio:</strong> ${{ tela.precio }} por {{ tela.unidad_medida }}</p>
+            <p class="detail-stock"><strong>Stock:</strong> {{ tela.stock }}</p>
+            <p class="detail-supplier"><strong>Proveedor:</strong> {{ tela.id_proveedor.nombre }}</p>
+        </div>
+    </div>
+
+    <div class="detail-actions">
+        <a href="{% url 'app_TelasYProveedores:editar_tela' tela.id %}" class="btn btn-secondary">✏️ Editar</a>
+        <a href="{% url 'app_TelasYProveedores:borrar_tela' tela.id %}" class="btn btn-danger">🗑️ Borrar</a>
+    </div>
+
+    <section class="supplier-info">
+        <h2>Información del Proveedor</h2>
+        <div class="supplier-details">
+            <p><strong>Contacto:</strong> {{ tela.id_proveedor.contacto }}</p>
+            <p><strong>Teléfono:</strong> {{ tela.id_proveedor.telefono }}</p>
+            <p><strong>Correo:</strong> {{ tela.id_proveedor.correo }}</p>
+            <p><strong>Dirección:</strong> {{ tela.id_proveedor.direccion }}</p>
+        </div>
+    </section>
+</article>
+{% endblock %}

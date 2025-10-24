@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block titulo %}Productos Telas | Parisina{% endblock %}
+
+{% block contenido %}
+<div class="page-header">
+    <h2>Catálogo de Telas</h2>
+    <a href="{% url 'app_TelasYProveedores:crear_tela' %}" class="btn btn-primary">+ Agregar Tela</a>
+</div>
+
+<ul class="product-grid">
+    {% for tela in telas %}
+    <li class="product-card">
+        <a href="{% url 'app_TelasYProveedores:detalle_tela' tela.id %}">
+            {% if tela.imagen_tela %}
+                <img src="{{ tela.imagen_tela.url }}" alt="Imagen de {{ tela.nombre }}" class="product-img">
+            {% else %}
+                <div class="product-placeholder">🧵</div>
+            {% endif %}
+            <h3>{{ tela.nombre }}</h3>
+            <p class="product-category">{{ tela.categoria }}</p>
+            <p class="product-price">${{ tela.precio }} / {{ tela.unidad_medida }}</p>
+            <p class="product-stock">Stock: {{ tela.stock }}</p>
+        </a>
+    </li>
+    {% empty %}
+    <li class="no-products">No hay telas registradas.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
